@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="search.css">
+    <title>Flight Search Page</title>
+</head>
+<body>
+    <div class="wrapper">
+        <%- include('header.ejs') %>
+        <%- include('search.ejs') %>
+
+        
+
+        <% if (flightResults.length === 0) { %>
+            
+            <section class="search-flight-results-section">
+                <div class="search-flight-flight-result">
+                    <div class="not-available">
+                        <span class="search-flight-time">NOT AVAILABLE</span>
+                    </div>
+                </div>
+            </section>
+        <% } else { %>
+            
+            <section class="search-flight-results-section">
+                <% flightResults.forEach((flight, index) => { %>
+                    <div class="search-flight-flight-result">
+                        <div class="search-flight-flight-time">
+                            <span class="search-flight-time"><%= flight.departureTime %></span>
+                            <span class="search-flight-airport"><%= flight.departureAirport %></span>
+                            <span class="search-flight-duration"><%= flight.duration %></span>
+                            <span class="search-flight-time"><%= flight.arrivalTime %></span>
+                            <span class="search-flight-airport"><%= flight.arrivalAirport %></span>
+                        </div>
+                        <div class="search-flight-flight-info">
+                            <div class="search-flight-flight-number"><%= flight.flightNumber %></div>
+                        </div>
+                        <div class="search-flight-price">
+                            <a href="/book?flightData=<%= encodeURIComponent(JSON.stringify(flight)) %>">
+                                <div class="search-flight-price-value"><%= flight.price %></div>
+                            </a>
+                        </div>
+                        
+                    </div>
+                <% }); %>
+            </section>
+        <% } %>
+        
+
+        <%- include('footer.ejs') %>
+    </div>
+</body>
+</html>

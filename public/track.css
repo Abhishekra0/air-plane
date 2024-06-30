@@ -1,0 +1,164 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.status-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #002379;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+header .status-search-flight-logo img {
+    height: 50px;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+header nav ul li {
+    margin: 0 10px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+header .status-search-flight-login-signup button {
+    background-color: #FF5F00;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+header .status-search-flight-login-signup button:hover {
+    background-color: #ff7f33;
+}
+
+.status-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f8f8;
+    padding: 20px;
+    margin: 10px;
+}
+
+.status-form-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.status-1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    margin-right: 10px;
+}
+
+input[type="text"] {
+    margin-right: 20px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.status-flightno{
+    margin-bottom: 10px;
+}
+
+.status-flightdate{
+    margin-top: 10px;
+}
+
+button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #002379;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;;
+}
+
+button:hover {
+    background-color: #002379;
+}
+
+.status-flight-status-result {
+    background-color: #e0e0e0;
+    border: 2px solid #002379;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-top: 20px;
+}
+
+.status-hidden {
+    display: none;
+}
+
+footer {
+    background-color: #002379;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    flex-wrap: wrap;
+    margin-top: auto;
+}
+
+.status-footer-section {
+    width: 20%;
+}
+
+.status-footer-section h3 {
+    border-bottom: 1px solid #fff;
+    padding-bottom: 10px;
+}
+
+.status-footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.status-footer-section ul li {
+    margin: 10px 0;
+}
+
+.status-footer-section ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.status-footer-section ul li a:hover {
+    text-decoration: underline;
+}

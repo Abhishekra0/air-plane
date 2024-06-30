@@ -1,0 +1,74 @@
+<section class="search-flight-search-section">
+    <h1>Book Domestic and International Flight Tickets</h1>
+    <div class="search-flight-search-options">
+        <label>
+            <input type="radio" name="trip" checked> Round trip
+        </label>
+        <label>
+            <input type="radio" name="trip"> One way
+        </label>
+    </div>
+    <form class="search-flight-search-form" action="/search" method="POST">
+        <div class="form-group optional-input">
+            <select name="from-select">
+                <option value="" disabled selected>Select From</option>
+                <option value="Delhi">Delhi ✈️</option>
+                <option value="Mumbai">Mumbai ✈️</option>
+                <option value="Bangalore">Bangalore ✈️</option>
+                <option value="Chennai">Chennai ✈️</option>
+                <option value="Kolkata">Kolkata ✈️</option>
+                <option value="Hyderabad">Hyderabad ✈️</option>
+                <option value="Ahmedabad">Ahmedabad ✈️</option>
+                <option value="Pune">Pune ✈️</option>
+                <option value="Goa">Goa ✈️</option>
+                <option value="Jaipur">Jaipur ✈️</option>
+                <option value="Dubai">Dubai ✈️</option>
+                <option value="NewYork">NewYork ✈️</option>
+                <option value="London">London ✈️</option>
+            </select>
+            <input type="text" name="from" placeholder="Where From?" required>
+        </div>
+
+        <div class="form-group optional-input">
+            <select name="to-select">
+                <option value="" disabled selected>Select To</option>
+                <option value="Delhi">Delhi ✈️</option>
+                <option value="Mumbai">Mumbai ✈️</option>
+                <option value="Bangalore">Bangalore ✈️</option>
+                <option value="Chennai">Chennai ✈️</option>
+                <option value="Kolkata">Kolkata ✈️</option>
+                <option value="Hyderabad">Hyderabad ✈️</option>
+                <option value="Ahmedabad">Ahmedabad ✈️</option>
+                <option value="Pune">Pune ✈️</option>
+                <option value="Goa">Goa ✈️</option>
+                <option value="Jaipur">Jaipur ✈️</option>
+                <option value="Dubai">Dubai ✈️</option>
+                <option value="NewYork">NewYork ✈️</option>
+                <option value="London">London ✈️</option>
+            </select>
+            <input type="text" name="to" placeholder="Where To?" required>
+        </div>
+
+        <input type="date" name="date" required>
+        <button type="submit">Search</button>
+    </form>
+</section>
+
+<script>
+    document.querySelectorAll('.optional-input select').forEach(select => {
+        select.addEventListener('change', function() {
+            if (this.value) {
+                this.nextElementSibling.value = this.value.split(' ✈️')[0];
+            }
+        });
+    });
+
+    document.querySelectorAll('.optional-input input').forEach(input => {
+        input.addEventListener('input', function() {
+            if (this.value) {
+                this.previousElementSibling.value = '';
+            }
+        });
+    });
+</script>
+</body>

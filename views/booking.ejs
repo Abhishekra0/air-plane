@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking</title>
+    <link rel="stylesheet" href="search.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <%- include('header') %>
+        <div class="flight-details">
+            <h2>Flight Details</h2>
+            <div class="flight-info">
+                <div class="flight-info-row">
+                    <span class="info-label">Flight Number:</span>
+                    <span class="info-value"><%= flightData.flightNumber %></span>
+                </div>
+                <div class="flight-info-row">
+                    <span class="info-label">Departure Time:</span>
+                    <span class="info-value"><%= flightData.departureTime %></span>
+                </div>
+                <div class="flight-info-row">
+                    <span class="info-label">Departure Airport:</span>
+                    <span class="info-value"><%= flightData.departureAirport %></span>
+                </div>
+                <div class="flight-info-row">
+                    <span class="info-label">Arrival Time:</span>
+                    <span class="info-value"><%= flightData.arrivalTime %></span>
+                </div>
+                <div class="flight-info-row">
+                    <span class="info-label">Arrival Airport:</span>
+                    <span class="info-value"><%= flightData.arrivalAirport %></span>
+                </div>
+                <div class="flight-info-row">
+                    <span class="info-label">Date:</span>
+                    <span class="info-value"><%= flightData.date %></span>
+                </div>
+                <div class="flight-info-row">
+                    <span class="info-label">Price:</span>
+                    <span class="info-value">$<%= flightData.price %></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="booking-section-flight">
+            <form id="passenger-form" class="passenger-details">
+                <h2>Passenger Details</h2>
+                <div class="name-section">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" name="firstName" required placeholder="John">
+                
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" name="lastName" required placeholder="Doe">
+                </div>
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" min="1" required placeholder="25">
+            
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required placeholder="johndoe@email.com">
+            
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required placeholder="555-123-4567">
+            
+                <input type="hidden" name="flightNumber" value="<%= flightData.flightNumber %>">
+                <input type="hidden" name="departureTime" value="<%= flightData.departureTime %>">
+                <input type="hidden" name="departureAirport" value="<%= flightData.departureAirport %>">
+                <input type="hidden" name="arrivalTime" value="<%= flightData.arrivalTime %>">
+                <input type="hidden" name="arrivalAirport" value="<%= flightData.arrivalAirport %>">
+                <input type="hidden" name="date" value="<%= flightData.date %>">
+                <input type="hidden" name="price" value="<%= flightData.price %>">
+            
+                <button type="button" id="rzp-button1">Checkout</button>
+            </form>
+        </div>
+        
+        <%- include('footer') %>
+    </div>
+
+    <script>
+        document.getElementById('rzp-button1').onclick = function(e){
+            e.preventDefault();
+        
+        
+            var formData = {
+        firstName: $('#firstName').val(),
+        lastName: $('#lastName').val(),
+        gender: $('#gender').val(),
+        age: $('#age').val(),
+        email: $('#email').val(),
+        phone: $('#phone').val(),
+        flightNumber: $('input[name="flightNumber"]').val(),
+        departureTime: $('input[name="departureTime"]').val(),
+        departureAirport: $('input[name="departureAirport"]').val(),
+        arrivalTime: $('input[name="arrivalTime"]').val(),
+        arrivalAirport: $('input[name="arrivalAirport"]').val(),
+        date: $('input[name="date"]').val(),
+        price: $('input[name="price"]').val()
+    };
+        
+            
+            $.ajax({
+                url: '/api/payment/order',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    amount: formData.price * 100, 
+                    currency: 'INR'
+                }),
+                success: function(order) {
+                    var options = {
+                        "key": "rzp_test_xqURUfFox64Iw6", 
+                        "amount": order.amount, 
+                        "currency": order.currency,
+                        "name": "JetEase",
+                        "description": "Test Transaction",
+                        "image": "https://example.com/your_logo",
+                        "order_id": order.id, 
+                        "handler": function (response){
+                            const paymentDetails = {
+                                order_id: order.id,
+                                razorpay_payment_id: response.razorpay_payment_id,
+                                razorpay_signature: response.razorpay_signature
+                            };
+        
+                            $.ajax({
+                                url: '/api/payment/verify',
+                                method: 'POST',
+                                contentType: 'application/json',
+                                data: JSON.stringify(paymentDetails),
+                                success: function (data) {
+                                    if (data.success) {
+                                        
+                                        
+                                        const confirmationUrl = '/confirmation' + 
+        '?firstName=' + encodeURIComponent(formData.firstName) +
+        '&lastName=' + encodeURIComponent(formData.lastName) +
+        '&gender=' + encodeURIComponent(formData.gender) +
+        '&age=' + encodeURIComponent(formData.age) +
+        '&email=' + encodeURIComponent(formData.email) +
+        '&phone=' + encodeURIComponent(formData.phone) +
+        '&flightNumber=' + encodeURIComponent(formData.flightNumber) +
+        '&departureTime=' + encodeURIComponent(formData.departureTime) +
+        '&departureAirport=' + encodeURIComponent(formData.departureAirport) +
+        '&arrivalTime=' + encodeURIComponent(formData.arrivalTime) +
+        '&arrivalAirport=' + encodeURIComponent(formData.arrivalAirport) +
+        '&date=' + encodeURIComponent(formData.date) +
+        '&price=' + encodeURIComponent(formData.price)
+        +
+        '&orderId=' + encodeURIComponent(response.order_id) +
+        '&razorpayPaymentId=' + encodeURIComponent(response.razorpay_payment_id);
+    window.location.href = confirmationUrl;
+                                    } else {
+                                        alert('Payment verification failed.');
+                                    }
+                                }
+                            });
+                        },
+        
+                        "notes": {
+                            "address": "Razorpay Corporate Office"
+                        },
+                        "theme": {
+                            "color": "#002379"
+                        }
+                    };
+        
+                    var rzp1 = new Razorpay(options);
+                    rzp1.on('payment.failed', function (response){
+                        alert(response.error.code);
+                        alert(response.error.description);
+                        alert(response.error.source);
+                        alert(response.error.step);
+                        alert(response.error.reason);
+                        alert(response.error.metadata.order_id);
+                        alert(response.error.metadata.payment_id);
+                    });
+        
+                    rzp1.open();
+                },
+                error: function(err) {
+                    alert('Error creating order. Please try again.');
+                }
+            });
+        }
+        </script>
+        
+</body>
+</html>

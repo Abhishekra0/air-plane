@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="track.css">
+    <link rel="stylesheet" href="search.css">
+    <title>Flight Status</title>
+</head>
+<body>
+    <div class="status-wrapper">
+        <%- include('header.ejs') %>
+        <div class="status-content">
+            <div class="status-form-container">
+                <form id="flight-status-form"  action="/check-status" method="POST">
+                    <div class="status-flightno">
+                    <label for="flight-number">Enter Flight Number:</label>
+                    <input type="text" id="flightNumber" name="flightNumber" required><br>
+                    </div>
+                    
+                    <div class="status-flightdate">
+                    <label for="flight-date">Enter Flight Date:</label>
+                    <input type="date" id="date" name="date" required><br>
+                    </div>
+                    
+                    <div>
+                    <button type="submit">Check Status</button>
+                    </div>
+                    
+                </form>
+                <div id="flight-status-result" class="status-flight-status-result hidden">
+                    <p id="status">
+                        <% if (locals.flightStatus) { %>
+                            Flight Status: <span><%= flightStatus %></span>
+                        <% } %>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- footer starts from here  -->
+        <%- include('footer.ejs') %>
+        
+    </div>
+    
+    <script src="scripts.js"></script>
+</body>
+</html>

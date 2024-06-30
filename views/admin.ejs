@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Information Form</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h2>Admin Portal - Add Flight</h2>
+            <a class="close-button" href="/">X</a>
+        </div>
+        <form action="/add-flight" method="POST" class="login-form">
+            <div class="input-group">
+                <label for="flightNumber">Flight Number:</label>
+                <input type="text" id="flightNumber" name="flightNumber" value="KA105" required>
+            </div>
+            <div class="input-group">
+                <label for="departureAirport">Departure Airport:</label>
+                <select id="departureAirport" name="departureAirport" required>
+                    <option value="" disabled selected>Select From</option>
+                    <option value="Delhi">Delhi ✈️</option>
+                    <option value="Mumbai">Mumbai ✈️</option>
+                    <option value="Bangalore">Bangalore ✈️</option>
+                    <option value="Chennai">Chennai ✈️</option>
+                    <option value="Kolkata">Kolkata ✈️</option>
+                    <option value="Hyderabad">Hyderabad ✈️</option>
+                    <option value="Ahmedabad">Ahmedabad ✈️</option>
+                    <option value="Pune">Pune ✈️</option>
+                    <option value="Goa">Goa ✈️</option>
+                    <option value="Jaipur">Jaipur ✈️</option>
+                    <option value="Dubai">Dubai ✈️</option>
+                <option value="NewYork">NewYork ✈️</option>
+                <option value="London">London ✈️</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="arrivalAirport">Arrival Airport:</label>
+                <select id="arrivalAirport" name="arrivalAirport" required>
+                    <option value="" disabled selected>Select To</option>
+                    <option value="Delhi">Delhi ✈️</option>
+                    <option value="Mumbai">Mumbai ✈️</option>
+                    <option value="Bangalore">Bangalore ✈️</option>
+                    <option value="Chennai">Chennai ✈️</option>
+                    <option value="Kolkata">Kolkata ✈️</option>
+                    <option value="Hyderabad">Hyderabad ✈️</option>
+                    <option value="Ahmedabad">Ahmedabad ✈️</option>
+                    <option value="Pune">Pune ✈️</option>
+                    <option value="Goa">Goa ✈️</option>
+                    <option value="Jaipur">Jaipur ✈️</option>
+                    <option value="Dubai">Dubai ✈️</option>
+                <option value="NewYork">NewYork ✈️</option>
+                <option value="London">London ✈️</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="departureTime">Departure Time:  (hh:mm)</label>
+                <input type="text" id="departureTime" name="departureTime" value="08:15" required>
+            </div>
+            <div class="input-group">
+                <label for="arrivalTime">Arrival Time:  (hh:mm)</label>
+                <input type="text" id="arrivalTime" name="arrivalTime" value="04:51" required>
+            </div>
+            <div class="input-group">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" value="2024-06-15" required>
+            </div>
+            <div class="input-group">
+                <label for="duration">Duration:</label>
+                <input type="text" id="duration" name="duration" value="3h" required>
+            </div>
+            <div class="input-group">
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" value="124" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="submit-button">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

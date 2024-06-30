@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
+    <title>Login Page</title>
+</head>
+<body>
+
+<div class="blurry-background">
+    
+</div>
+
+<div class="login-container">
+    <div class="login-header">
+        <h2>Login</h2>
+        <% if (typeof error !== 'undefined') { %>
+            <h4 id="erroror" class="error-message"><%= error %></h4>
+        <% } %>
+        <a class="close-button" href="/">X</a>
+    </div>
+    <form class="login-form">
+        <div class="input-group">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" required>
+        </div>
+        <div class="input-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit" class="submit-button" formaction="/submit-login" formmethod="post">Login</button>
+    </form>
+    <div class="signup-link">
+        Don't have an account? <a href="/signup">Sign Up</a>
+    </div>
+    <div class="forgot-link">
+        Forgot your password? <a href="/forgot">Recover it here</a>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+<header>
+    <div class="search-flight-logo">
+        <img src="Assets/JetEase.svg" alt="JetEase Logo">
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/admin">Admin</a></li>
+            <li><a href="/track">Flight Status</a></li>
+        </ul>
+    </nav>
+    <div class="search-flight-login-signup">
+        <% if (user) { %>
+            <a href="/logout" class="login-signup">Logout</a>
+        <% } else { %>
+            <a href="/login" class="login-signup">Login/Signup</a>
+        <% } %>
+    </div>
+</header>
