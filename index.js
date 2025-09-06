@@ -10,7 +10,7 @@ import Flight from './models/Flight.js';
 import { checkAuth } from './routers/auth.js'; // Import the middleware
 
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001;
 
 const key_id = 'rzp_test_xqURUfFox64Iw6';
 const key_secret = 'UlcCoi5F2RF3UjmZql6eRJtT';
@@ -145,5 +145,6 @@ connectToDatabase()
   .catch((error) => {
     console.error('Error starting server:', error);
   });
+
 
   
